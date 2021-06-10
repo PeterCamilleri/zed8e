@@ -3,7 +3,7 @@
 ; Some helper macros
 
 ;   A macro to step the origin with padding so the output file is not crap.
-    macro pad addr
+    macro pad_to addr
     assert ($<=addr), "Error, code overrun"
     if $ < addr             ; Add padding
         block addr-$,$C7

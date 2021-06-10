@@ -14,7 +14,7 @@
   3+  0000              ; Some helper macros
   4+  0000
   5+  0000              ;   A macro to step the origin with padding so the output file is not crap.
-  6+  0000                  macro pad addr
+  6+  0000                  macro pad_to addr
   7+  0000 ~                assert ($<=addr), "Error, code overrun"
   8+  0000 ~                if $ < addr             ; Add padding
   9+  0000 ~                    block addr-$,$C7
@@ -29,7 +29,7 @@
  14   0001 31 FE FF         ld      SP,init_sp  ; Set up the SP register.
  15   0004 C3 6E 00         jp      start_up
  16   0007
- 17   0007                  pad     $0008       ; Entry point for rst #$08 or do_does
+ 17   0007                  pad_to  $0008       ; Entry point for rst #$08 or do_does
  17   0007             >    assert ($<=$0008), "Error, code overrun"
  17   0007             >    if $ < $0008             ; Add padding
  17   0007 C7          >        block $0008-$,$C7
@@ -43,7 +43,7 @@
  24   0015
  25   0015                  ; Note rst #$10 is not available.
  26   0015
- 27   0015                  pad     $0018       ; Entry point for rst #$18 or do_const
+ 27   0015                  pad_to  $0018       ; Entry point for rst #$18 or do_const
  27   0015             >    assert ($<=$0018), "Error, code overrun"
  27   0015             >    if $ < $0018             ; Add padding
  27   0015 C7 C7 C7    >        block $0018-$,$C7
@@ -55,14 +55,14 @@
  32   001C D5               push    de
  33   001D DD E9            jp      ix          ; NEXT
  34   001F
- 35   001F                  pad     $0020       ; Entry point for rst #$20 or do_var
+ 35   001F                  pad_to  $0020       ; Entry point for rst #$20 or do_var
  35   001F             >    assert ($<=$0020), "Error, code overrun"
  35   001F             >    if $ < $0020             ; Add padding
  35   001F C7          >        block $0020-$,$C7
  35   0020             >    endif
  36   0020 DD E9            jp      ix          ; NEXT
  37   0022
- 38   0022                  pad     $0028       ; Entry point for rst #$20 or do_colon
+ 38   0022                  pad_to  $0028       ; Entry point for rst #$20 or do_colon
  38   0022             >    assert ($<=$0028), "Error, code overrun"
  38   0022             >    if $ < $0028             ; Add padding
  38   0022 C7 C7 C7... >        block $0028-$,$C7
@@ -76,7 +76,7 @@
  45   0035
  46   0035                  ; Note rst #$30 is not available.
  47   0035
- 48   0035                  pad     $0038       ; Entry point for rst #$38 or interrupt mode 1.
+ 48   0035                  pad_to  $0038       ; Entry point for rst #$38 or interrupt mode 1.
  48   0035             >    assert ($<=$0038), "Error, code overrun"
  48   0035             >    if $ < $0038             ; Add padding
  48   0035 C7 C7 C7    >        block $0038-$,$C7
@@ -110,7 +110,7 @@
  75   0054 F1               pop     af
  76   0055 ED 4D            reti
  77   0057
- 78   0057                  pad     $0066       ; Entry point for Nonmaskable interrupt.
+ 78   0057                  pad_to  $0066       ; Entry point for Nonmaskable interrupt.
  78   0057             >    assert ($<=$0066), "Error, code overrun"
  78   0057             >    if $ < $0066             ; Add padding
  78   0057 C7 C7 C7... >        block $0066-$,$C7
