@@ -46,9 +46,36 @@
     ; Note rst #$30 is not available.
 
     pad     $0038       ; Entry point for rst #$38 or interrupt mode 1.
+    push    af          ; Save all registers.
+    push    bc
+    push    de
+    push    hl
+    ex      af,af'
+    exx
+    push    af
+    push    bc
+    push    de
+    push    hl
+    push    ix
+    push    iy
+
     halt                ; Place holder for now.
 
-    pad     $0066       ; Entry point for Non-maskable interrupt.
+    pop     iy          ; Restore all registers
+    pop     ix
+    pop     hl
+    pop     de
+    pop     bc
+    pop     af
+    ex      af,af'
+    exx
+    pop     hl
+    pop     de
+    pop     bc
+    pop     af
+    reti
+
+    pad     $0066       ; Entry point for Nonmaskable interrupt.
     halt                ; Place holder for now.
 
 next:
@@ -63,9 +90,11 @@ next:
 start_up:
     ld      iy, next    ; IY always points to next.
     halt                ; Place holder for now.
-    
-; Beyond this point is RAM. No code should be generated for this region.    
 
-    org $FFFE
+; Beyond this point is RAM. No bytes should be generated for this region.
+    org     $8000
+ram_start:
+
+    org     $FFFE
 init_sp:
 
