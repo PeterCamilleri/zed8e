@@ -11,21 +11,16 @@
 # file opened: src\helpers.i
  1+   0000              ; Zed8E FORTH - A direct threaded FORTH for the Z-80
  2+   0000              ;
- 3+   0000              ; This FORTH is designed to run on bare bones hardware with no O/S or
- 4+   0000              ; other forms of interference or support.
- 5+   0000              ;
- 6+   0000
- 7+   0000
- 8+   0000              ;   A macro to step the origin with padding so the output file is not crap.
- 9+   0000
-10+   0000                  macro padorg addr
-11+   0000 ~                assert ($<=addr), "Error, code overrun"
-12+   0000 ~                if $ < addr             ; Add padding
-13+   0000 ~                    block addr-$,$C7
-14+   0000 ~                endif
-15+   0000 ~                org addr                ; Set the origin. Why? Does this do anything?
-16+   0000                  endm
-17+   0000
+ 3+   0000              ; Some helper macros
+ 4+   0000
+ 5+   0000              ;   A macro to step the origin with padding so the output file is not crap.
+ 6+   0000                  macro pad addr
+ 7+   0000 ~                assert ($<=addr), "Error, code overrun"
+ 8+   0000 ~                if $ < addr             ; Add padding
+ 9+   0000 ~                    block addr-$,$C7
+10+   0000 ~                endif
+11+   0000                  endm
+12+   0000
 # file closed: src\helpers.i
 10    0000
 11    0000                  org $0000           ; The system reset entry point.
@@ -34,12 +29,11 @@
 14    0001 31 FE FF         ld      SP,init_sp  ; Set up the SP register.
 15    0004 C3 6E 00         jp      start_up
 16    0007
-17    0007                  padorg  $0008       ; Entry point for rst #$08 or do_does
+17    0007                  pad     $0008       ; Entry point for rst #$08 or do_does
 17    0007             >    assert ($<=$0008), "Error, code overrun"
 17    0007             >    if $ < $0008             ; Add padding
 17    0007 C7          >        block $0008-$,$C7
 17    0008             >    endif
-17    0008             >    org $0008                ; Set the origin. Why? Does this do anything?
 18    0008 FD 70 00         ld      (iy+0),b    ; Push the IP onto the RS
 19    000B FD 2B            dec     iy
 20    000D FD 71 00         ld      (iy+0),c
@@ -49,12 +43,11 @@
 24    0015
 25    0015                  ; Note rst #$10 is not available.
 26    0015
-27    0015                  padorg $0018        ; Entry point for rst #$18 or do_const
+27    0015                  pad     $0018       ; Entry point for rst #$18 or do_const
 27    0015             >    assert ($<=$0018), "Error, code overrun"
 27    0015             >    if $ < $0018             ; Add padding
 27    0015 C7 C7 C7    >        block $0018-$,$C7
 27    0018             >    endif
-27    0018             >    org $0018                ; Set the origin. Why? Does this do anything?
 28    0018 E1               pop     hl
 29    0019 5E               ld      e,(hl)
 30    001A 23               inc     hl
@@ -62,20 +55,18 @@
 32    001C D5               push    de
 33    001D DD E9            jp      ix          ; NEXT
 34    001F
-35    001F                  padorg $0020        ; Entry point for rst #$20 or do_var
+35    001F                  pad     $0020       ; Entry point for rst #$20 or do_var
 35    001F             >    assert ($<=$0020), "Error, code overrun"
 35    001F             >    if $ < $0020             ; Add padding
 35    001F C7          >        block $0020-$,$C7
 35    0020             >    endif
-35    0020             >    org $0020                ; Set the origin. Why? Does this do anything?
 36    0020 DD E9            jp      ix          ; NEXT
 37    0022
-38    0022                  padorg $0028        ; Entry point for rst #$20 or do_colon
+38    0022                  pad     $0028       ; Entry point for rst #$20 or do_colon
 38    0022             >    assert ($<=$0028), "Error, code overrun"
 38    0022             >    if $ < $0028             ; Add padding
 38    0022 C7 C7 C7... >        block $0028-$,$C7
 38    0026             >    endif
-38    0028             >    org $0028                ; Set the origin. Why? Does this do anything?
 39    0028 FD 70 00         ld      (iy+0),b    ; Push the IP onto the RS
 40    002B FD 2B            dec     iy
 41    002D FD 71 00         ld      (iy+0),c
@@ -85,20 +76,18 @@
 45    0035
 46    0035                  ; Note rst #$30 is not available.
 47    0035
-48    0035                  padorg $0038        ; Entry point for rst #$38 or interrupt mode 1.
+48    0035                  pad     $0038       ; Entry point for rst #$38 or interrupt mode 1.
 48    0035             >    assert ($<=$0038), "Error, code overrun"
 48    0035             >    if $ < $0038             ; Add padding
 48    0035 C7 C7 C7    >        block $0038-$,$C7
 48    0038             >    endif
-48    0038             >    org $0038                ; Set the origin. Why? Does this do anything?
 49    0038 76               halt                ; Place holder for now.
 50    0039
-51    0039                  padorg $0066        ; Entry point for Non-maskable interrupt.
+51    0039                  pad     $0066       ; Entry point for Non-maskable interrupt.
 51    0039             >    assert ($<=$0066), "Error, code overrun"
 51    0039             >    if $ < $0066             ; Add padding
 51    0039 C7 C7 C7... >        block $0066-$,$C7
 51    003D             >    endif
-51    0066             >    org $0066                ; Set the origin. Why? Does this do anything?
 52    0066 76               halt                ; Place holder for now.
 53    0067
 54    0067              next:

@@ -14,7 +14,7 @@
     ld      SP,init_sp  ; Set up the SP register.
     jp      start_up
 
-    padorg  $0008       ; Entry point for rst #$08 or do_does
+    pad     $0008       ; Entry point for rst #$08 or do_does
     ld      (iy+0),b    ; Push the IP onto the RS
     dec     iy
     ld      (iy+0),c
@@ -24,7 +24,7 @@
 
     ; Note rst #$10 is not available.
 
-    padorg $0018        ; Entry point for rst #$18 or do_const
+    pad     $0018       ; Entry point for rst #$18 or do_const
     pop     hl
     ld      e,(hl)
     inc     hl
@@ -32,10 +32,10 @@
     push    de
     jp      ix          ; NEXT
 
-    padorg $0020        ; Entry point for rst #$20 or do_var
+    pad     $0020       ; Entry point for rst #$20 or do_var
     jp      ix          ; NEXT
 
-    padorg $0028        ; Entry point for rst #$20 or do_colon
+    pad     $0028       ; Entry point for rst #$20 or do_colon
     ld      (iy+0),b    ; Push the IP onto the RS
     dec     iy
     ld      (iy+0),c
@@ -45,10 +45,10 @@
 
     ; Note rst #$30 is not available.
 
-    padorg $0038        ; Entry point for rst #$38 or interrupt mode 1.
+    pad     $0038       ; Entry point for rst #$38 or interrupt mode 1.
     halt                ; Place holder for now.
 
-    padorg $0066        ; Entry point for Non-maskable interrupt.
+    pad     $0066       ; Entry point for Non-maskable interrupt.
     halt                ; Place holder for now.
 
 next:
