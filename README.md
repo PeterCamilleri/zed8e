@@ -5,6 +5,7 @@ with FORTH in ROM. For now it is a pure software project.
 
 ## TODO
 
+* Do a brain dump of all the scribbled notes so this stuff is not lost. DONE!
 * Write documentation. Lots of documentation.
 * Write code. Lots of code.
 * Find a suitable Z-80 emulation environment to run tests.

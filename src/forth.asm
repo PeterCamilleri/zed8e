@@ -11,13 +11,13 @@
     org $0000           ; The system reset entry point.
 
     di                  ; Make certain that interrupts are disabled.
-    ld      SP,init_sp  ; Set up the SP register.
+    ld      SP,init_ds  ; Set up the SP register.
     jp      start_up
 
     pad_to  $0008       ; Entry point for rst #$08 or do_does
-    ld      (iy+0),b    ; Push the IP onto the RS
+    ld      (iy),b      ; Push the IP onto the RS
     dec     iy
-    ld      (iy+0),c
+    ld      (iy),c
     dec     iy
     pop     bc
     jp      ix          ; NEXT
@@ -36,9 +36,9 @@
     jp      ix          ; NEXT
 
     pad_to  $0028       ; Entry point for rst #$20 or do_colon
-    ld      (iy+0),b    ; Push the IP onto the RS
+    ld      (iy),b    ; Push the IP onto the RS
     dec     iy
-    ld      (iy+0),c
+    ld      (iy),c
     dec     iy
     pop     bc
     jp      ix          ; NEXT
@@ -88,13 +88,17 @@ next:
     jp      hl          ; Execute it.
 
 start_up:
-    ld      iy, next    ; IY always points to next.
+    ld      iy,next     ; IY always points to next.
+    ld      ix,init_rs  ; Set up the FORTH RS pointer.
     halt                ; Place holder for now.
 
 ; Beyond this point is RAM. No bytes should be generated for this region.
     org     $8000
 ram_start:
 
-    org     $FFFE
-init_sp:
+    org     $FEFE       ; The FORTH return stack grows down from here.
+init_rs:
 
+    org     $FFFE
+init_ds:                ; The FORTH data stack grows down from here.
+                        ; Also the system stack.
