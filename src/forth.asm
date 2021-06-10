@@ -36,7 +36,7 @@
     jp      ix          ; NEXT
 
     pad_to  $0028       ; Entry point for rst #$20 or do_colon
-    ld      (iy),b    ; Push the IP onto the RS
+    ld      (iy),b      ; Push the IP onto the RS
     dec     iy
     ld      (iy),c
     dec     iy
