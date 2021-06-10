@@ -1,0 +1,22 @@
+# file opened: src\forth.asm
+ 1    0000              ; Zed8E FORTH - A direct threaded FORTH for the Z-80
+ 2    0000              ;
+ 3    0000              ; This FORTH is designed to run on bare bones hardware with no O/S or
+ 4    0000              ; other forms of interference or support.
+ 5    0000              ;
+ 6    0000
+ 7    0000                  OUTPUT rom_image.dat
+ 8    0000
+ 9    0000                  org $0000       ; The system reset entry point.
+10    0000
+11    0000 31 FE FF         ld SP,init_sp  ; Set up the SP register.
+12    0003 C3 06 00         jp start_up
+13    0006
+14    0006              start_up:
+15    0006 76               halt            ; Place holder for now.
+16    0007
+17    0007                  org $FFFE
+18    FFFE              init_sp:
+19    FFFE
+20    FFFE
+# file closed: src\forth.asm
