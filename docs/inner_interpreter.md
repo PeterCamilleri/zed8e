@@ -11,8 +11,10 @@ Z-80 as follows:
 ![Register Mapping](./Images/Registers.png)
 
 * BC points to the next virtual machine word.
-* IX is the virtual machine's return stack pointer.
-* IY is a short-cut pointer to the virtual machine's next routine.
+* IX is the virtual machine's return stack pointer. This is called `rsp` in
+the source code.
+* IY is a short-cut pointer to the virtual machine's next routine. This is
+called `pnext` in the source code.
 * SP is the virtual machine's data stack pointer.
 * All other registers are working registers that are not preserved
 across words.
@@ -53,6 +55,9 @@ next:
     ld      h,a
     jp      hl          ; Execute it.
 ```
+Code words should always end with the instruction `jp pnext` to resume
+normal, threaded code execution. Code words are responsible for preserving
+all FORTH virtual machine registers, including rsp (ix), pnext (iy), and bc.
 
 ## Threaded Words
 
@@ -67,10 +72,10 @@ byte following it onto the stack. This code is shown below.
 
 ```
 do_rst_08:
-    ld      (ix),b      ; Push the IP onto the RS
-    dec     ix
-    ld      (ix),c
-    dec     ix
+    ld      (rsp),b     ; Push the IP onto the RS
+    dec     rsp
+    ld      (rsp),c
+    dec     rsp
     pop     bc          ; Get the address saved by rst #$08.
 
     ; code falls through to the "next" code (see above).

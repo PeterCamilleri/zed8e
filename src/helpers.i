@@ -10,3 +10,8 @@
         block addr-$,$C7
     endif
     endm
+
+; Some defines to reduce errors and mix usp.
+
+    define rsp ix
+    define pnext iy

@@ -4,6 +4,6 @@
 ;
 
 start_up:
-    ld      iy,next     ; IY always points to next.
-    ld      ix,init_rs  ; Set up the FORTH RS pointer.
+    ld      pnext,next  ; pnext always points to next.
+    ld      rsp,init_rs ; Set up the FORTH return stack pointer.
     halt                ; Place holder for now.
