@@ -6,7 +6,7 @@ a deep dive into the design decisions that went into this code.
 ## Register Mapping
 
 The FORTH virtual machine registers are mapped to the registers of the
-Z-80 are used as follows:
+Z-80 as follows:
 
 ![Register Mapping](./Images/Registers.png)
 
@@ -58,7 +58,7 @@ next:
 
 The following shows the activity associated with a high level threaded word.
 
-![Code Word](./Images/threaded_word.png)
+![Code Word](./Images/threaded_word2.png)
 
 The action of the fetch and dispatch are unchanged. The key difference
 is the `rst $28` instruction that invokes the do_colon handler located at

@@ -11,17 +11,26 @@
     ld      SP,init_ds  ; Set up the SP register.
     jp      start_up
 
-    pad_to  $0008       ; Entry point for rst #$08 or do_does
+    pad_to  $0008       ; Entry point for rst #$08 or do_colon
     ld      (iy),b      ; Push the IP onto the RS
     dec     iy
     ld      (iy),c
     dec     iy
     pop     bc
-    jp      ix          ; NEXT
+
+next:
+    ld      a,(bc)      ; Fetch the next instruction.
+    inc     bc
+    ld      l,a
+    ld      a,(bc)
+    inc     bc
+    ld      h,a
+    jp      hl          ; Execute it.
 
     ; Note: rst #$10 is not available.
+    ; Note: rst #$18 is not available.
 
-    pad_to  $0018       ; Entry point for rst #$18 or do_const
+    pad_to  $0020       ; Entry point for rst #$18 or do_const
     pop     hl
     ld      e,(hl)
     inc     hl
@@ -29,18 +38,10 @@
     push    de
     jp      ix          ; NEXT
 
-    pad_to  $0020       ; Entry point for rst #$20 or do_var
+    pad_to  $0028       ; Entry point for rst #$20 or do_var
     jp      ix          ; NEXT
 
-    pad_to  $0028       ; Entry point for rst #$28 or do_colon
-    ld      (iy),b      ; Push the IP onto the RS
-    dec     iy
-    ld      (iy),c
-    dec     iy
-    pop     bc
-    jp      ix          ; NEXT
-
-    ; Note: rst #$30 is not available.
+    pad_to  $0030       ; Entry point for rst #$30
 
     pad_to  $0038       ; Entry point for rst #$38 or interrupt mode 1.
     push    af          ; Save all registers.
@@ -74,12 +75,3 @@
 
     pad_to  $0066       ; Entry point for nonmaskable interrupt.
     halt                ; Place holder for now.
-
-next:
-    ld      a,(bc)      ; Fetch the next instruction.
-    inc     bc
-    ld      l,a
-    ld      a,(bc)
-    inc     bc
-    ld      h,a
-    jp      hl          ; Execute it.
