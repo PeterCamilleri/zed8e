@@ -15,20 +15,20 @@ Z-80 are used as follows:
 * IY is a short-cut pointer to the virtual machine's next routine.
 * SP is the virtual machine's data stack pointer.
 * All other registers are working registers that are not preserved
-accross words.
+across words.
 * Note: On entry to a word, HL points to the start address of that word.
 
 ## About the rst #$nn instructions
 
 The Z-80 has eight operation codes (inherited from the 8080) that are
-specialized subroutine calls. These are the rst #$nn instructions. They
+specialized subroutine calls. These are the `rst #$nn` instructions. They
 are single byte instructions that allow subroutines to be called at
 certain specific addresses. When possible, Zed8E FORTH uses these
 unusual instructions because they save space, 1 byte vs. 3 bytes and time,
-11 clock cycles vs. 17 clock cycles. The big limitation of the rst op
+11 clock cycles vs. 17 clock cycles. The big limitation of the `rst` op
 codes is the target address which may only be: $00, $08, $10, $18, $20,
-$28, $30, and $38. Thus rst handlers must be eight bytes or less or
-straddle more than one rst allocation making overlapping targets
+$28, $30, and $38. Thus `rst` handlers must be eight bytes or less or
+straddle more than one `rst` allocation making overlapped targets
 unavailable.
 
 ## Code Words
@@ -62,7 +62,8 @@ The following shows the activity associated with a high level threaded word.
 
 The action of the fetch and dispatch are unchanged. The key difference
 is the rst $28 instruction that invokes the do_colon handler located at
-address $28. This code is shown below.
+address $28. Recall that the `rst` instruction pushes the address of the
+byte following it onto the stack. This code is shown below.
 
 ```
 do_rst_28:
