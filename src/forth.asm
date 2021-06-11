@@ -4,21 +4,13 @@
 ; other forms of interference or support.
 ;
 
-    OUTPUT rom_image.dat
+    output "rom_image.dat"
 
     include "helpers.i"
     include "low_page.asm"
-
+    include "start_up.asm"
 
 ; Beyond this point is RAM.
-    outend              ;  No bytes should be generated for this region.
+    outend  ; No bytes should be generated from now on.
 
-    org     $8000
-ram_start:
-
-    org     $FEFE       ; The FORTH return stack grows down from here.
-init_rs:
-
-    org     $FFFE
-init_ds:                ; The FORTH data stack grows down from here.
-                        ; Also the system stack.
+    include "ram_defs.asm"

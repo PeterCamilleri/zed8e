@@ -72,7 +72,7 @@
     pop     af
     reti
 
-    pad_to  $0066       ; Entry point for Nonmaskable interrupt.
+    pad_to  $0066       ; Entry point for nonmaskable interrupt.
     halt                ; Place holder for now.
 
 next:
@@ -83,8 +83,3 @@ next:
     inc     bc
     ld      h,a
     jp      hl          ; Execute it.
-
-start_up:
-    ld      iy,next     ; IY always points to next.
-    ld      ix,init_rs  ; Set up the FORTH RS pointer.
-    halt                ; Place holder for now.
