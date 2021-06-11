@@ -18,6 +18,19 @@ Z-80 are used as follows:
 accross words.
 * Note: On entry to a word, HL points to the start address of that word.
 
+## About the rst #$nn instructions
+
+The Z-80 has eight operation codes (inherited from the 8080) that are
+specialized subroutine calls. These are the rst #$nn instructions. They
+are single byte instructions that allow subroutines to be called at
+certain specific addresses. When possible, Zed8E FORTH uses these
+unusual instructions because they save space, 1 byte vs. 3 bytes and time,
+11 clock cycles vs. 17 clock cycles. The big limitation of the rst op
+codes is the target address which may only be: $00, $08, $10, $18, $20,
+$28, $30, and $38. Thus rst handlers must be eight bytes or less or
+straddle more than one rst allocation making overlapping targets
+unavailable.
+
 ## Code Words
 
 The following shows the activity associated with a code word.
