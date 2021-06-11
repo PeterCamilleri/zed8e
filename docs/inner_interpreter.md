@@ -92,3 +92,10 @@ Since the target for the does portion can be almost anywhere in memory,
 the restrictions of the `rst` instruction cannot be used and the full
 three byte `call` instruction is required. The destination of this `call`
 is the `does>` assembly code.
+
+## Builds Does Threaded Words
+
+A `<builds ... does>` word where the implementation of the `does>` 
+portion is threaded code is almost identical to the code case. The only
+difference is the the `does>` code starts with a `rst #$08` or do_colon
+byte to switch to high level code.
