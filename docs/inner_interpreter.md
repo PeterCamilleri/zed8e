@@ -61,7 +61,7 @@ The following shows the activity associated with a high level threaded word.
 ![Code Word](./Images/threaded_word.png)
 
 The action of the fetch and dispatch are unchanged. The key difference
-is the rst $28 instruction that invokes the do_colon handler located at
+is the `rst $28` instruction that invokes the do_colon handler located at
 address $28. Recall that the `rst` instruction pushes the address of the
 byte following it onto the stack. This code is shown below.
 
@@ -71,7 +71,7 @@ do_rst_28:
     dec     iy
     ld      (iy),c
     dec     iy
-    pop     bc
+    pop     bc          ; Get the address saved by rst #$28.
     jp      ix          ; NEXT
 
 ```
