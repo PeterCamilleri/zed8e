@@ -8,4 +8,4 @@ a deep dive into the design decisions that went into this code.
 The FORTH virtual machine registers are mapped to the registers of the 
 Z-80 are used as follows:
 
-![Register Mapping](./images/Registers.png)
+![Register Mapping](./Images/Registers.png)
