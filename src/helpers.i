@@ -15,3 +15,5 @@
 
     define rsp ix
     define pnext iy
+    ; The sp is the FORTH dsp but since it almost never used by name,
+    ; there is little point in giving it an alias.

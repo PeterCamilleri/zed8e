@@ -8,7 +8,7 @@
     org $0000           ; The system reset entry point.
 
     di                  ; Make certain that interrupts are disabled.
-    ld      SP,init_ds  ; Set up the SP register.
+    ld      sp,init_ds  ; Set up the FORTH data stack pointer.
     jp      start_up
 
     pad_to  $0008       ; Entry point for rst #$08 or do_colon
