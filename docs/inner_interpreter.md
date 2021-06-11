@@ -17,3 +17,13 @@ Z-80 are used as follows:
 * All other registers are working registers that are not preserved
 accross words.
 * Note: On entry to a word, HL points to the start address of that word.
+
+## Code Words
+
+The following shows the activity associated with a code word.
+
+![Code Word](./Images/code_word.png)
+
+As can be seen, the BC register points to a word in the code stream. That
+word is fetched into the HL register and execution of the code word
+begins at that address.
