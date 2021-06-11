@@ -22,7 +22,7 @@ accross words.
 
 The following shows the activity associated with a code word.
 
-![Code Word](./Images/code_word.png)
+![Code Word](./Images/code_word2.png)
 
 As can be seen, the BC register points to a word in the code stream. That
 word is fetched into the HL register and execution of the code word
