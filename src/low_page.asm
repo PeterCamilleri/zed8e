@@ -30,7 +30,7 @@ next:
     ; Note: rst #$10 is not available.
     ; Note: rst #$18 is not available.
 
-    pad_to  $0020       ; Entry point for rst #$18 or do_const
+    pad_to  $0020       ; Entry point for rst #$20 or do_const
     pop     hl
     ld      e,(hl)
     inc     hl
@@ -38,10 +38,10 @@ next:
     push    de
     jp      ix          ; NEXT
 
-    pad_to  $0028       ; Entry point for rst #$20 or do_var
+    pad_to  $0028       ; Entry point for rst #$28 or do_var
     jp      ix          ; NEXT
 
-    pad_to  $0030       ; Entry point for rst #$30
+    pad_to  $0030       ; Entry point for rst #$30 - unused.
 
     pad_to  $0038       ; Entry point for rst #$38 or interrupt mode 1.
     push    af          ; Save all registers.
