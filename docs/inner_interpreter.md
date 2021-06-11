@@ -5,7 +5,7 @@ a deep dive into the design decisions that went into this code.
 
 ## Register Mapping
 
-The FORTH virtual machine registers are mapped to the registers of the 
+The FORTH virtual machine registers are mapped to the registers of the
 Z-80 are used as follows:
 
 ![Register Mapping](./Images/Registers.png)
@@ -40,3 +40,29 @@ next:
     ld      h,a
     jp      hl          ; Execute it.
 ```
+
+## Threaded Words
+
+The following shows the activity associated with a high level threaded word.
+
+![Code Word](./Images/threaded_word.png)
+
+The action of the fetch and dispatch are unchanged. The key difference
+is the rst $28 instruction that invokes the do_colon handler located at
+address $28. This code is shown below.
+
+```
+do_rst_28:
+    ld      (iy),b      ; Push the IP onto the RS
+    dec     iy
+    ld      (iy),c
+    dec     iy
+    pop     bc
+    jp      ix          ; NEXT
+
+```
+
+This code pushes the current virtual instruction pointer (bc) onto the FORTH
+return stack and then pops the return address (put there by the rst $28)
+into bc to start threaded execution there. The jump to next (via ix) starts
+execution at the new starting point.
