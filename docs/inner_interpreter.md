@@ -35,7 +35,7 @@ unavailable.
 
 The following shows the activity associated with a code word.
 
-![Code Word](./Images/code_word2.png)
+![Code Word](./Images/code_word3.png)
 
 As can be seen, the BC register points to a word in the code stream. That
 word is fetched into the HL register and execution of the code word
@@ -67,17 +67,28 @@ byte following it onto the stack. This code is shown below.
 
 ```
 do_rst_08:
-    ld      (iy),b      ; Push the IP onto the RS
-    dec     iy
-    ld      (iy),c
-    dec     iy
+    ld      (ix),b      ; Push the IP onto the RS
+    dec     ix
+    ld      (ix),c
+    dec     ix
     pop     bc          ; Get the address saved by rst #$08.
-    
-    ; code falls through to the next code.
 
+    ; code falls through to the "next" code (see above).
 ```
 
 This code pushes the current virtual instruction pointer (bc) onto the FORTH
 return stack and then pops the return address (put there by the rst $28)
 into bc to start threaded execution there. The jump to next (via ix) starts
 execution at the new starting point.
+
+## Builds Does Code Words
+
+This next section deals with classic FORTH `<builds ... does>` words where
+the implementation of the `does>` portion is in assembly code.
+
+![Builds Does Code Word](./Images/builds_does.png)
+
+Since the target for the does portion can be almost anywhere in memory,
+the restrictions of the `rst` instruction cannot be used and the full
+three byte `call` instruction is required. The destination of this `call`
+is the `does>` assembly code.

@@ -12,10 +12,10 @@
     jp      start_up
 
     pad_to  $0008       ; Entry point for rst #$08 or do_colon
-    ld      (iy),b      ; Push the IP onto the RS
-    dec     iy
-    ld      (iy),c
-    dec     iy
+    ld      (ix),b      ; Push the IP onto the RS
+    dec     ix
+    ld      (ix),c
+    dec     ix
     pop     bc
 
 next:
@@ -36,10 +36,10 @@ next:
     inc     hl
     ld      d,(hl)
     push    de
-    jp      ix          ; NEXT
+    jp      iy          ; NEXT
 
     pad_to  $0028       ; Entry point for rst #$28 or do_var
-    jp      ix          ; NEXT
+    jp      iy          ; NEXT
 
     pad_to  $0030       ; Entry point for rst #$30 - unused.
 
