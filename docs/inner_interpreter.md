@@ -27,3 +27,16 @@ The following shows the activity associated with a code word.
 As can be seen, the BC register points to a word in the code stream. That
 word is fetched into the HL register and execution of the code word
 begins at that address.
+
+The simple code that gets this done is:
+
+```
+next:
+    ld      a,(bc)      ; Fetch the next instruction.
+    inc     bc
+    ld      l,a
+    ld      a,(bc)
+    inc     bc
+    ld      h,a
+    jp      hl          ; Execute it.
+```
