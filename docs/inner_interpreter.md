@@ -35,7 +35,7 @@ unavailable.
 
 The following shows the activity associated with a code word.
 
-![Code Word](./Images/code_word3.png)
+![Code Word](./Images/code_word4.png)
 
 As can be seen, the BC register points to a word in the code stream. That
 word is fetched into the HL register and execution of the code word
