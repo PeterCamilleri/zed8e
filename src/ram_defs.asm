@@ -6,6 +6,12 @@
     org     $8000
 ram_start:
 
+__here:     reserve 2   ; The next byte to be used in the dictionary
+__last:     reserve 2   ; The last word to be defined.
+__mode:     reserve 1   ; The current language mode.
+
+free_start:
+
     org     $FEFE       ; The FORTH return stack grows down from here.
 init_rs:
 

@@ -5,12 +5,15 @@
 ;
 
     output "rom_image.dat"
+    define mspace 0
 
     include "helpers.i"
     include "low_page.asm"
     include "start_up.asm"
 
 ; Beyond this point is RAM.
+    undefine mspace
+    define mspace 1
     outend  ; No bytes should be generated from now on.
 
     include "ram_defs.asm"

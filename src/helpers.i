@@ -5,10 +5,18 @@
 ;   A macro to step the origin with padding so the output file is not crap.
 ;   Padding is with $C7 (rst #$00) so lost code will reset.
     macro pad_to addr
+    assert (mspace = 0), "Must be in rom"
     assert ($<=addr), "Error, code overrun"
     if $ < addr             ; Add padding
         block addr-$,$C7
     endif
+    endm
+
+;   A macro for reserving space without emitting any bytes for that space.
+;   Only for use in RAM, never for ROM or it will mess up the image file.
+    macro reserve size
+    assert (mspace = 1), "Must be in ram"
+    org $+size
     endm
 
 ; Some defines to reduce errors and mix usp.
