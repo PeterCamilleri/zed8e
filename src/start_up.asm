@@ -11,7 +11,7 @@ start_up:
     ld      hl,free_start
     ld      [__here],hl
 
-    ; For now there is no "last" definition.
+    ; For now there is no "last" definition. This will change!
     ld      hl,0
     ld      [__last],hl
 
