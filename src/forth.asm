@@ -9,6 +9,7 @@
 
     include "common.i"
     include "low_page.asm"
+    include "string.asm"
 
     include "dict_a.asm"
 
