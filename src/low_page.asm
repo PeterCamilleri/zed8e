@@ -7,6 +7,7 @@
 
     org $0000           ; The system reset entry point.
 
+    ; The processor RESET entry point. It all starts here.
     di                  ; Make certain that interrupts are disabled.
     ld      sp,init_ds  ; Set up the FORTH data stack pointer.
     jp      start_up
