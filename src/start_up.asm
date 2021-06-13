@@ -11,12 +11,17 @@ start_up:
     ld      hl,free_start
     ld      [__here],hl
 
-    ; For now there is no "last" definition. This will change!
-    ld      hl,0
+    ; Point to the "last" definition.
+    ld      hl,last_entry
     ld      [__last],hl
 
     ; Clear the language mode.
     xor     a
     ld      [__mode],a
+
+    ; There is no current definition at this time.
+    ld      l,a
+    ld      h,a
+    ld      [__current],hl
 
     halt                ; Place holder for now.

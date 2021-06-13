@@ -12,6 +12,8 @@
 
     include "dict_a.asm"
 
+    ; Define the last entry in dictionary.
+    define last_entry last_a
     include "start_up.asm"
 
 ; Beyond this point is RAM.
