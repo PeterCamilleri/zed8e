@@ -13,9 +13,9 @@ __mode:     reserve 1   ; The current mode. 0 is interpret else compiling.
 
 free_start:
 
-    org     $FEFE       ; The FORTH return stack grows down from here.
+    org     $FEFF       ; The FORTH return stack grows down from here.
 init_rs:
 
-    org     $FFFE
+    org     $FFFF
 init_ds:                ; The FORTH data stack grows down from here.
                         ; Also the system stack.
