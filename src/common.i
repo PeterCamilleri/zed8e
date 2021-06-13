@@ -25,3 +25,10 @@
     define pnext iy
     ; The sp is the FORTH dsp but since it almost never used by name,
     ; there is little point in giving it an alias.
+
+; Some defines for word flags byte.
+
+cmo equ $0  ; Compile in compile mode, error in execute mode.
+xix equ $1  ; Execute in execute mode, compile in compile mode.
+xic equ $2  ; Execute in compile mode, error in execute mode.
+xia equ $3  ; Execute in any mode.

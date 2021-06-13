@@ -5,7 +5,7 @@
 
 __drop:     ; a --
     word    0   ; This is the end of the line
-    byte    0
+    byte    xix
     byte    4
     abyte   0 "drop"
     pop     hl
@@ -13,7 +13,7 @@ __drop:     ; a --
 
 __dup:      ; a -- a a
     word    __drop
-    byte    0
+    byte    xix
     byte    3
     abyte   0 "dup"
     pop     hl
@@ -23,7 +23,7 @@ __dup:      ; a -- a a
 
 __swap:     ; a b -- b a
     word    __dup
-    byte    0
+    byte    xix
     byte    4
     abyte   0 "swap"
     pop     hl
@@ -34,7 +34,7 @@ __swap:     ; a b -- b a
 
 __over:     ; a b -- b a b
     word    __swap
-    byte    0
+    byte    xix
     byte    4
     abyte   0 "over"
     pop     hl
@@ -46,7 +46,7 @@ __over:     ; a b -- b a b
 
 __rot:      ; a b c -- c a b
     word    __over
-    byte    0
+    byte    xix
     byte    3
     abyte   0 "rot"
     exx
@@ -62,7 +62,7 @@ __rot:      ; a b c -- c a b
 __qdup:     ; a -- a a if a <> 0
             ; a -- 0   if a == 0
     word    __rot
-    byte    0
+    byte    xix
     byte    4
     abyte   0 "?dup"
     pop     hl
