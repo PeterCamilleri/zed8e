@@ -7,7 +7,7 @@
     output "rom_image.dat"
     define mspace 0
 
-    include "helpers.i"
+    include "common.i"
     include "low_page.asm"
 
     include "dict_a.asm"
