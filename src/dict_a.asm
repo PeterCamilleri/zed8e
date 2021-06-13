@@ -68,7 +68,7 @@ __qdup:     ; a -- a a if a <> 0
     pop     hl
     push    hl
     ld      a,l
-    or      a,h
+    or      h
     jr      z,__qdup_z
     push    hl
 __qdup_z:

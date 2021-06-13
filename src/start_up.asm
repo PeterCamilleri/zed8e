@@ -16,7 +16,7 @@ start_up:
     ld      [__last],hl
 
     ; Clear the language mode.
-    xor     a,a
+    xor     a
     ld      [__mode],a
 
     halt                ; Place holder for now.
