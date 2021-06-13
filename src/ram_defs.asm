@@ -7,9 +7,9 @@
 ram_start:
 
 __here:     reserve 2   ; The next byte to be used in the dictionary
-__last:     reserve 2   ; The last word to be defined.
-__current:  reserve 2   ; The word currently being defined.
-__mode:     reserve 1   ; The current language mode.
+__last:     reserve 2   ; The LFA of the last word to be defined.
+__current:  reserve 2   ; The LFA of the word currently being defined.
+__mode:     reserve 1   ; The current mode. 0 is interpret else compiling.
 
 free_start:
 
