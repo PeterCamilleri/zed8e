@@ -9,8 +9,10 @@
 
     include "helpers.i"
     include "low_page.asm"
-    include "start_up.asm"
+
     include "dict_a.asm"
+
+    include "start_up.asm"
 
 ; Beyond this point is RAM.
     undefine mspace

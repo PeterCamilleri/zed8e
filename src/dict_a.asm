@@ -74,3 +74,5 @@ __qdup:     ; a -- a a if a <> 0
 __qdup_z:
     jp      pnext
 
+    ; Define the last entry in dictionary section 'a'.
+    define last_a __qdup
