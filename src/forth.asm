@@ -12,9 +12,10 @@
     include "string.asm"
 
     include "dict_a.asm"
+    include "dict_b.asm"
 
     ; Define the last entry in dictionary.
-    define last_entry last_a
+    define last_entry last_b
     include "start_up.asm"
 
 ; Beyond this point is RAM.
