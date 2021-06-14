@@ -15,9 +15,9 @@
     ; The entry point for colon definitions.
     pad_to  $0008       ; Entry point for rst #$08 or do_colon
     ld      (rsp),b     ; Push the IP onto the RS
-    dec     rsp
+    inc     rsp
     ld      (rsp),c
-    dec     rsp
+    inc     rsp
     pop     bc
 
     ; Execute the next high level instruction word.
