@@ -7,9 +7,9 @@
 ; On entry: HL points to the length field of the first string.
 ;           DE points to the length field of the second string.
 ; On exit: Z flag is set if the strings are equal.
+;          The B register is clobbered.
 ;
 streq:
-    push    bc
     push    de
     push    hl
 
@@ -37,5 +37,4 @@ streq_loop:
 streq_done:
     pop     hl
     pop     de
-    pop     bc
     ret
