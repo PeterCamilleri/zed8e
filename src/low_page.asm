@@ -13,7 +13,8 @@
     jp      start_up
 
     ; The entry point for colon definitions.
-    pad_to  $0008       ; Entry point for rst #$08 or do_colon
+    pad_to  $0008       ; Entry point for rst $08 or do_colon
+    define  do_colon rst $08
     ld      (rsp),b     ; Push the IP onto the RS
     inc     rsp
     ld      (rsp),c
@@ -30,11 +31,11 @@ next:
     ld      h,a
     jp      hl          ; Execute it.
 
-    ; Note: rst #$10 is not available.
-    ; Note: rst #$18 is not available.
+    ; Note: rst $10 is not available.
+    ; Note: rst $18 is not available.
 
     ; Push a constant onto the address.
-    pad_to  $0020       ; Entry point for rst #$20 or do_const
+    pad_to  $0020       ; Entry point for rst $20 or do_const
     pop     hl
     ld      e,(hl)
     inc     hl
@@ -43,13 +44,13 @@ next:
     jp      pnext       ; NEXT
 
     ; Push the address of a variable onto the stack.
-    pad_to  $0028       ; Entry point for rst #$28 or do_var
+    pad_to  $0028       ; Entry point for rst $28 or do_var
     jp      pnext       ; NEXT
 
-    pad_to  $0030       ; Entry point for rst #$30 - unused.
+    pad_to  $0030       ; Entry point for rst $30 - unused.
 
     ; The mode 1 interrupt handler.
-    pad_to  $0038       ; Entry point for rst #$38 or interrupt mode 1.
+    pad_to  $0038       ; Entry point for rst $38 or interrupt mode 1.
     push    af          ; Save all registers.
     push    bc
     push    de
@@ -78,6 +79,14 @@ next:
     pop     bc
     pop     af
     reti
+
+    ; Mark the end of a high level code word. The compliment of do_colon.
+cfa_do_semi:
+    dec     rsp
+    ld      b,(rsp)     ; Pop the IP from the RS
+    dec     rsp
+    ld      c,(rsp)
+    jp      pnext
 
     ; The NMI handler.
     pad_to  $0066       ; Entry point for nonmaskable interrupt.

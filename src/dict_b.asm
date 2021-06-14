@@ -8,6 +8,7 @@ __add:      ; a b -- b+a
     byte    xix
     byte    1
     abyte   0 "+"
+cfa_add:    
     pop     de
     pop     hl
     add     hl,de
@@ -35,7 +36,7 @@ __mul:      ; a b -- b*a
     pop     de
     pop     bc
 
-    ; This code performs the operation DEHL=BC*DE
+    ; This code performs the operation DE:HL=BC*DE
     ld      hl,0
     ld      a,16
 __mul_loop:
@@ -76,5 +77,16 @@ __mod:      ; a b -- b%a
     push    hl
     jp      pnext
 
+__2times:   ; a -- 2*a
+    word    __mod
+    byte    xix
+    byte    2
+    abyte   0 "2*"
+    do_colon
+    word    cfa_dup
+    word    cfa_add
+    word    cfa_do_semi
+
+
     ; Define the last entry in dictionary section 'b'.
-    define last_b __mod
+    define last_b __2times

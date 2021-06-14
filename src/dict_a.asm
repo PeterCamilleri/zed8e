@@ -16,6 +16,7 @@ __dup:      ; a -- a a
     byte    xix
     byte    3
     abyte   0 "dup"
+cfa_dup:
     pop     hl
     push    hl
     push    hl

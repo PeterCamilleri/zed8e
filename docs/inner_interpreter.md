@@ -23,7 +23,7 @@ across words.
 ## About the rst #$nn instructions
 
 The Z-80 has eight operation codes (inherited from the 8080) that are
-specialized subroutine calls. These are the `rst #$nn` instructions. They
+specialized subroutine calls. These are the `rst $nn` instructions. They
 are single byte instructions that allow subroutines to be called at
 certain specific addresses. When possible, Zed8E FORTH uses these
 unusual instructions because they save space, 1 byte vs. 3 bytes and time,
@@ -71,12 +71,13 @@ address $08. Recall that the `rst` instruction pushes the address of the
 byte following it onto the stack. This code is shown below.
 
 ```
-do_rst_08:
+    pad_to  $0008       ; Entry point for rst $08 or do_colon
+    define  do_colon rst $08
     ld      (rsp),b     ; Push the IP onto the RS
     dec     rsp
     ld      (rsp),c
     dec     rsp
-    pop     bc          ; Get the address saved by rst #$08.
+    pop     bc          ; Get the address saved by rst $08.
 
     ; code falls through to the "next" code (see above).
 ```
