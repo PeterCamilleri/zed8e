@@ -75,5 +75,96 @@ __qdup:     ; a -- a a if a <> 0
 __qdup_z:
     jp      pnext
 
+__2drop:    ; da --
+            ; a b --
+    word    __qdup
+    byte    xix
+    byte    5
+    abyte   0 "2drop"
+    pop     hl
+    pop     hl
+    jp      pnext
+
+__2dup:     ; da -- da da
+            ; a b -- a b a b
+    word    __2drop
+    byte    xix
+    byte    4
+    abyte   0 "2dup"
+    pop     hl
+    pop     de
+    push    de
+    push    hl
+    push    de
+    push    hl
+    jp      pnext
+
+__2swap:    ; da db -- db da
+            ; a b c d -- c d a b
+    word    __2dup
+    byte    xix
+    byte    5
+    abyte   0 "2swap"
+    pop     hl
+    pop     de
+    exx
+    pop     hl
+    pop     de
+    exx
+    push    de
+    push    hl
+    exx
+    push    de
+    push    hl
+    exx
+    jp      pnext
+
+__2over:    ; 2a 2b -- 2b 2a 2b
+            ; a b c d -- c d a b c d
+    word    __2swap
+    byte    xix
+    byte    5
+    abyte   0 "2over"
+    pop     hl
+    pop     de
+    exx
+    pop     hl
+    pop     de
+    push    de
+    push    hl
+    exx
+    push    de
+    push    hl
+    exx
+    push    de
+    push    hl
+    exx
+    jp      pnext
+
+__2rot:     ; da db dc -- dc da db
+            ; a b c d e f -- e f a b c d
+    word    __2over
+    byte    xix
+    byte    4
+    abyte   0 "2rot"
+    pop     hl
+    pop     de
+    exx
+    pop     hl
+    pop     de
+    pop     bc
+    pop     pnext
+    push    de
+    push    hl
+    exx
+    push    de
+    push    hl
+    exx
+    push    pnext
+    push    bc
+    exx
+    ld      pnext,next  ; pnext always points to next.
+    jp      pnext
+
     ; Define the last entry in dictionary section 'a'.
-    define last_a __qdup
+    define last_a __2rot
