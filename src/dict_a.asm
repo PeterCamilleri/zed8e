@@ -7,8 +7,8 @@ __drop:     ; a --
     word    0   ; This is the end of the line
     byte    xix
     byte    4
-cfa_drop:
     abyte   0 "drop"
+cfa_drop:
     pop     hl
     jp      pnext
 

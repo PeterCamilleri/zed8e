@@ -65,7 +65,9 @@ __div:      ; a b -- b/a
 cfa_div:
     pop     de
     pop     hl
+
     ; wip
+
     push    hl
     jp      pnext
 
@@ -77,7 +79,9 @@ __mod:      ; a b -- b%a
 cfa_mod:
     pop     de
     pop     hl
+
     ; wip
+
     push    hl
     jp      pnext
 
