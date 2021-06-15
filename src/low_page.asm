@@ -82,8 +82,8 @@ next:
 
     ; Mark the end of a high level code word. The compliment of do_colon.
 cfa_do_semi:
-    dec     rsp
-    ld      b,(rsp)     ; Pop the IP from the RS
+    dec     rsp         ; Pop the IP from the RS
+    ld      b,(rsp)
     dec     rsp
     ld      c,(rsp)
     jp      pnext

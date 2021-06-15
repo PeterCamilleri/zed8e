@@ -87,6 +87,18 @@ return stack and then pops the return address (put there by the rst $28)
 into bc to start threaded execution there. The jump to next (via ix) starts
 execution at the new starting point.
 
+For completeness, consider the routine that is the opposite of do_colon,
+namely do_semi (for semi-colon).
+
+```
+cfa_do_semi:
+    dec     rsp         ; Pop the IP from the RS
+    ld      b,(rsp)
+    dec     rsp
+    ld      c,(rsp)
+    jp      pnext
+```
+
 ## Builds Does Code Words
 
 This next section deals with classic FORTH `<builds ... does>` words where
@@ -101,7 +113,7 @@ is the `does>` assembly code.
 
 ## Builds Does Threaded Words
 
-A `<builds ... does>` word where the implementation of the `does>` 
+A `<builds ... does>` word where the implementation of the `does>`
 portion is threaded code is almost identical to the code case. The only
 difference is the the `does>` code starts with a `rst #$08` or do_colon
 byte to switch to high level code.
