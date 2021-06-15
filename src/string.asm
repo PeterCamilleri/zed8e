@@ -7,12 +7,9 @@
 ; On entry: HL points to the length field of the first string.
 ;           DE points to the length field of the second string.
 ; On exit: Z flag is set if the strings are equal.
-;          The B register is clobbered.
+;          The B, DE, and HL registers are clobbered.
 ;
 streq:
-    push    de
-    push    hl
-
     ; Compare the lengths first.
     ld      a,(de)
     cp      (hl)
@@ -35,6 +32,4 @@ streq_loop:
     djnz    streq_loop
 
 streq_done:
-    pop     hl
-    pop     de
     ret
