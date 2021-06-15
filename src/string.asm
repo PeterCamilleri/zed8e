@@ -7,7 +7,7 @@
 ; On entry: HL points to the length field of the first string.
 ;           DE points to the length field of the second string.
 ; On exit: Z flag is set if the strings are equal.
-;          The B, DE, and HL registers are clobbered.
+;          The A, B, DE, and HL registers are clobbered.
 ;
 streq:
     ; Compare the lengths first.
