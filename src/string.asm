@@ -13,11 +13,11 @@ streq:
     ; Compare the lengths first.
     ld      a,(de)
     cp      (hl)
-    jr      nz,streq_done
+    ret     nz      ; Bail if the lengths differ.
 
     ; Check for empty strings.
     and     a
-    jr      z,streq_done
+    ret     z       ; Exit if both strings are empty.
 
     ; Set up the length counter.
     ld      b,a
@@ -28,8 +28,7 @@ streq_loop:
     inc     hl
     ld      a,(de)
     cp      (hl)
-    jr      nz,streq_done
+    ret     nz      ; Bail if we find a difference.
     djnz    streq_loop
 
-streq_done:
-    ret
+    ret             ; Reached the end and done!
