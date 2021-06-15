@@ -8,7 +8,7 @@ __add:      ; a b -- b+a
     byte    xix
     byte    1
     abyte   0 "+"
-cfa_add:    
+cfa_add:
     pop     de
     pop     hl
     add     hl,de
@@ -20,6 +20,7 @@ __sub:      ; a b -- b-a
     byte    xix
     byte    1
     abyte   0 "-"
+cfa_sub:
     pop     de
     pop     hl
     ccf
@@ -32,6 +33,7 @@ __mul:      ; a b -- b*a
     byte    xix
     byte    1
     abyte   0 "*"
+cfa_mul:
     exx
     pop     de
     pop     bc
@@ -60,6 +62,7 @@ __div:      ; a b -- b/a
     byte    xix
     byte    1
     abyte   0 "/"
+cfa_div:
     pop     de
     pop     hl
     ; wip
@@ -71,6 +74,7 @@ __mod:      ; a b -- b%a
     byte    xix
     byte    3
     abyte   0 "mod"
+cfa_mod:
     pop     de
     pop     hl
     ; wip

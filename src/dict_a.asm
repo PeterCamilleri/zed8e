@@ -7,6 +7,7 @@ __drop:     ; a --
     word    0   ; This is the end of the line
     byte    xix
     byte    4
+cfa_drop:
     abyte   0 "drop"
     pop     hl
     jp      pnext
@@ -27,6 +28,7 @@ __swap:     ; a b -- b a
     byte    xix
     byte    4
     abyte   0 "swap"
+cfa_swap:
     pop     hl
     pop     de
     push    hl
@@ -38,6 +40,7 @@ __over:     ; a b -- b a b
     byte    xix
     byte    4
     abyte   0 "over"
+cfa_over:
     pop     hl
     pop     de
     push    de
@@ -50,6 +53,7 @@ __rot:      ; a b c -- c a b
     byte    xix
     byte    3
     abyte   0 "rot"
+cfa_rot:
     exx
     pop     hl
     pop     de
@@ -66,6 +70,7 @@ __qdup:     ; a -- a a if a <> 0
     byte    xix
     byte    4
     abyte   0 "?dup"
+cfa_qdup:
     pop     hl
     push    hl
     ld      a,l
@@ -81,6 +86,7 @@ __2drop:    ; da --
     byte    xix
     byte    5
     abyte   0 "2drop"
+cfa_2drop:
     pop     hl
     pop     hl
     jp      pnext
@@ -91,6 +97,7 @@ __2dup:     ; da -- da da
     byte    xix
     byte    4
     abyte   0 "2dup"
+cfa_2dup:
     pop     hl
     pop     de
     push    de
@@ -105,6 +112,7 @@ __2swap:    ; da db -- db da
     byte    xix
     byte    5
     abyte   0 "2swap"
+cfa_2swap:
     pop     hl
     pop     de
     exx
@@ -125,6 +133,7 @@ __2over:    ; 2a 2b -- 2b 2a 2b
     byte    xix
     byte    5
     abyte   0 "2over"
+cfa_2over:
     pop     hl
     pop     de
     exx
@@ -147,6 +156,7 @@ __2rot:     ; da db dc -- dc da db
     byte    xix
     byte    4
     abyte   0 "2rot"
+cfa_2rot:
     pop     hl
     pop     de
     exx
