@@ -11,6 +11,7 @@
     include "low_page.asm"  ; Code connected to specific Z-80 addresses.
     include "streq.asm"     ; String equal primitive.
     include "multiply.asm"  ; Multiply primitive.
+    include "divide.asm"    ; Divide primitive.
 
     include "dict_a.asm"    ; Stack Manipulation and Misc words.
     include "dict_b.asm"    ; Arithmetic and Logical words.
