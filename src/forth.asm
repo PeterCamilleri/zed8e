@@ -9,7 +9,7 @@
 
     include "common.i"      ; Common macros and definitions.
     include "low_page.asm"  ; Code connected to specific Z-80 addresses.
-    include "string.asm"    ; String handling primitive.
+    include "streq.asm"     ; String equal primitive.
 
     include "dict_a.asm"    ; Stack Manipulation and Misc words.
     include "dict_b.asm"    ; Arithmetic and Logical words.

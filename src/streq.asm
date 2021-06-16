@@ -1,6 +1,6 @@
 ; Zed8E FORTH - A direct threaded FORTH for the Z-80
 ;
-; String handling primitives.
+; String handling primitive: streq
 ;
 
 ; Compare two string to see if they are equal.
