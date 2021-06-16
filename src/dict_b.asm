@@ -88,11 +88,11 @@ __2times:   ; a -- 2*a
     byte    xix
     byte    2
     abyte   0 "2*"
-    do_colon
-    word    cfa_dup
-    word    cfa_add
-    word    cfa_do_semi
-
+cfa_2times:
+    pop     hl
+    add     hl,hl
+    push    hl
+    jp      pnext
 
     ; Define the last entry in dictionary section 'b'.
     define last_b __2times
