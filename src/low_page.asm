@@ -1,7 +1,7 @@
 ; Zed8E FORTH - A direct threaded FORTH for the Z-80
 ;
 ; This file contains code connected to specific low page addresses in the
-; Z-80 processor like the special rst #$nn call, the mode 1 interrupt
+; Z-80 processor like the special rst $nn call, the mode 1 interrupt
 ; handler and the nonmaskable interrupt handler.
 ;
 

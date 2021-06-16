@@ -25,7 +25,7 @@ start_up:
     ld      [__current],hl
 
     ; Set the default width.
-    ld      a,#80
+    ld      a,80
     ld      (__width),a
 
     halt                ; Place holder for now.
