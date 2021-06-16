@@ -13,7 +13,7 @@
 ; Note: Two versions of divide exist, one for unsigned data and the
 ;       other for signed data.
 
-u_divide:
+u_divide:               ; Unsigned divide.
     ld      a,e         ; Check for divide by zero.
     or      d
     jr      nz, u_divide_ok
@@ -60,4 +60,64 @@ u_divide_drop:
 
     ret
 
-s_divide:
+s_divide:               ; Signed divide.
+    ; Temp storage will be in unused RS space.
+    define  rem_sign rsp+1
+    define  quo_sign rsp+2
+
+    ; Save off sign information we will need later.
+    ld      a,h
+    ld      (rem_sign),a
+    xor     d
+    ld      (quo_sign),a
+
+    ; Take the absolute value of the divisor.
+    bit     7,d
+    jp      z,divisor_positive
+    xor     a
+    sub     e
+    ld      e,a
+    sbc     a
+    sub     d
+    ld      d,a
+
+divisor_positive:
+
+    ; Take the absolute value of the dividend.
+    bit     7,h
+    jp      z,dividend_positive
+    xor     a
+    sub     l
+    ld      l,a
+    sbc     a
+    sub     h
+    ld      h,a
+
+dividend_positive:
+
+    call    u_divide
+    ret     c
+
+; Negate the quotient if it needs to be negative.
+    bit     7,(quo_sign)
+    jp      z,quotient_positive:
+    xor     a
+    sub     e
+    ld      e,a
+    sbc     a,a
+    sub     d
+    ld      d,a
+quotient_positive:
+
+; Negate the remainder if it needs to be negative.
+    bit     7,(rem_sign)
+    jp      z,remainder_positive:
+    xor     a
+    sub     l
+    ld      l,a
+    sbc     a,a
+    sub     h
+    ld      h,a
+remainder_positive:
+
+    ret
