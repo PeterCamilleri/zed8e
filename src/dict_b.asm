@@ -61,12 +61,12 @@ __div:      ; a b -- b/a
     byte    1
     abyte   0 "/"
 cfa_div:
+    exx
     pop     de
     pop     hl
-
-    ; wip
-
-    push    hl
+    call    s_divide
+    push    de
+    exx
     jp      pnext
 
 __mod:      ; a b -- b%a
@@ -75,11 +75,12 @@ __mod:      ; a b -- b%a
     byte    3
     abyte   0 "mod"
 cfa_mod:
+    exx
     pop     de
     pop     hl
-
-    ; wip
-
+    call    s_divide
+    push    hl
+    exx
     push    hl
     jp      pnext
 
