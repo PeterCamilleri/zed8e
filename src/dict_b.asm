@@ -81,7 +81,6 @@ cfa_mod:
     call    s_divide
     push    hl
     exx
-    push    hl
     jp      pnext
 
 __2times:   ; a -- 2*a
