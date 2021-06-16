@@ -20,6 +20,7 @@
     ld      (rsp),c
     inc     rsp
     pop     bc
+    ; Deliberate fall through to the next routine.
 
     ; Execute the next high level instruction word.
 next:
