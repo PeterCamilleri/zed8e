@@ -17,18 +17,18 @@ streq:
 
     ; Check for empty strings.
     and     a
-    ret     z       ; Exit if both strings are empty.
+    ret     z       ; Exit if both strings are empty (length of zero).
 
     ; Set up the length counter.
     ld      b,a
 
     ; Check the characters of the string.
 streq_loop:
-    inc     de
+    inc     de      ; Step to the next character in each string.
     inc     hl
-    ld      a,(de)
+    ld      a,(de)  ; Compare those characters.
     cp      (hl)
     ret     nz      ; Bail if we find a difference.
     djnz    streq_loop
 
-    ret             ; Reached the end and done!
+    ret             ; Reached the end and done. Strings are equal!

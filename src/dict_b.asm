@@ -38,19 +38,19 @@ cfa_mul:
     pop     de
     pop     bc
 
-    ; This code performs the operation DE:HL=BC*DE
+    ; This code performs the operation DE:HL=BC*DE *NOT OPTIMIZED*
     ld      hl,0
     ld      a,16
 __mul_loop:
-    add     hl,hl
+    add     hl,hl           ; Shift DE:HL left.
     rl      e
     rl      d
-    jp      nc,__mul_nc
+    jp      nc,__mul_nc     ; If carry set, DE:HL += BC
     add     hl,bc
     jp      nc,__mul_nc
     inc     de
 __mul_nc:
-    dec     a
+    dec     a               ; Until we do this 16 times.
     jp      nz,__mul_loop
 
     push    hl
