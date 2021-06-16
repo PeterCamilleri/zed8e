@@ -80,7 +80,6 @@ s_divide:               ; Signed divide.
     sbc     a
     sub     d
     ld      d,a
-
 divisor_positive:
 
     ; Take the absolute value of the dividend.
@@ -92,7 +91,6 @@ divisor_positive:
     sbc     a
     sub     h
     ld      h,a
-
 dividend_positive:
 
     call    u_divide
