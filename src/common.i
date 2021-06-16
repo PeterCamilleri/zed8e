@@ -3,7 +3,7 @@
 ; Some helper macros
 
 ;   A macro to step the origin with padding so the output file is not crap.
-;   Padding is with $C7 (rst #$00) so lost code will reset. Only for ROM.
+;   Padding is with $C7 (rst $00) so lost code will reset. Only for ROM.
     macro pad_to addr
     assert (mspace = 0), "Must be in rom"
     assert ($<=addr), "Error, code overrun"
