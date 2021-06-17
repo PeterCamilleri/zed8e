@@ -83,8 +83,54 @@ cfa_mod:
     exx
     jp      pnext
 
-__2times:   ; a -- 2*a
+__udiv:     ; ua ub -- u(b/a)
     word    __mod
+    byte    xix
+    byte    2
+    abyte   0 "u/"
+cfa_udiv:
+    exx
+    pop     de
+    pop     hl
+    call    u_divide
+    push    de
+    exx
+    jp      pnext
+
+__umod:      ; a b -- u(b%a)
+    word    __udiv
+    byte    xix
+    byte    4
+    abyte   0 "umod"
+cfa_umod:
+    exx
+    pop     de
+    pop     hl
+    call    u_divide
+    push    hl
+    exx
+    jp      pnext
+
+__mmul:     ; ua ub -- ud(b*a)
+    word    __umod
+    byte    xix
+    byte    2
+    abyte   0 "m*"
+cfa_mmul:
+    exx
+    pop     de
+    pop     bc
+
+    call    multiply
+
+    push    de
+    push    hl
+    exx
+
+    jp      pnext
+
+__2times:   ; a -- 2*a
+    word    __mmul
     byte    xix
     byte    2
     abyte   0 "2*"
