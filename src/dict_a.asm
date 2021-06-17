@@ -4,7 +4,8 @@
 ;
 
 __drop:     ; a --
-    word    0   ; This is the end of the line
+            ; Drop the top of data stack.
+    word    0   ; This is the last entry in the dictionary.
     byte    xix
     byte    4
     abyte   0 "drop"
@@ -13,6 +14,7 @@ cfa_drop:
     jp      pnext
 
 __dup:      ; a -- a a
+            ; Duplicate the top of data stack.
     word    __drop
     byte    xix
     byte    3
@@ -24,6 +26,7 @@ cfa_dup:
     jp      pnext
 
 __swap:     ; a b -- b a
+            ; Swap the top and next of the data stack.
     word    __dup
     byte    xix
     byte    4
@@ -36,6 +39,7 @@ cfa_swap:
     jp      pnext
 
 __over:     ; a b -- b a b
+            ; Pull a copy of the next of stack over the top.
     word    __swap
     byte    xix
     byte    4
@@ -49,6 +53,7 @@ cfa_over:
     jp      pnext
 
 __rot:      ; a b c -- c a b
+            ; Rotate the top three data stack elements.
     word    __over
     byte    xix
     byte    3
@@ -66,6 +71,7 @@ cfa_rot:
 
 __qdup:     ; a -- a a if a <> 0
             ; a -- 0   if a == 0
+            ; Duplicate the top of the data stack if it's not zero.
     word    __rot
     byte    xix
     byte    4
@@ -82,6 +88,7 @@ __qdup_z:
 
 __2drop:    ; da --
             ; a b --
+            ; Drop the double data top of data stack.
     word    __qdup
     byte    xix
     byte    5
@@ -93,6 +100,7 @@ cfa_2drop:
 
 __2dup:     ; da -- da da
             ; a b -- a b a b
+            ; Duplicate the double top of data stack.
     word    __2drop
     byte    xix
     byte    4
@@ -108,6 +116,7 @@ cfa_2dup:
 
 __2swap:    ; da db -- db da
             ; a b c d -- c d a b
+            ; Swap the double top and next.
     word    __2dup
     byte    xix
     byte    5
@@ -129,6 +138,7 @@ cfa_2swap:
 
 __2over:    ; 2a 2b -- 2b 2a 2b
             ; a b c d -- c d a b c d
+            ; Pull a copy of the double next of stack over the top.
     word    __2swap
     byte    xix
     byte    5
@@ -152,6 +162,7 @@ cfa_2over:
 
 __2rot:     ; da db dc -- dc da db
             ; a b c d e f -- e f a b c d
+            ; Rotate the top three double data stack elements.
     word    __2over
     byte    xix
     byte    4
