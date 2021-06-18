@@ -83,7 +83,7 @@ cfa_mod:
     exx
     jp      pnext
 
-__udiv:     ; ua ub -- u(b/a)
+__udiv:     ; ua ub -- u(ub/ua)
     word    __mod
     byte    xix
     byte    2
@@ -97,7 +97,7 @@ cfa_udiv:
     exx
     jp      pnext
 
-__umod:      ; a b -- u(b%a)
+__umod:      ; ua ub -- u(ub%ua)
     word    __udiv
     byte    xix
     byte    4
@@ -111,7 +111,7 @@ cfa_umod:
     exx
     jp      pnext
 
-__mmul:     ; ua ub -- ud(b*a)
+__mmul:     ; ua ub -- ud(ub*ua)
     word    __umod
     byte    xix
     byte    2
