@@ -4,6 +4,10 @@
 ;
 
 start_up:
+    ; Set up system variables.
+    ; See ram_defs.asm for details.
+
+    ; Note: the SP is initialized in low_page.asm
     ld      pnext,next  ; pnext always points to next.
     ld      rsp,init_rs ; Set up the FORTH return stack pointer.
 

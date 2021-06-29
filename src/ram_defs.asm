@@ -12,9 +12,10 @@ __current:  reserve 2   ; The LFA of the word currently being defined.
 __mode:     reserve 1   ; The current mode. 0 is interpret else compiling.
 __width:    reserve 1   ; The terminal width in characters.
 
-free_start:
+free_start:             ; First free location for dictionary use.
 
     org     $FF00       ; The FORTH return stack grows up from here.
+free_end:               ; First not free location for dictionary use.
 init_rs:
 
     org     $FFFF
