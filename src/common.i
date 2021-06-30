@@ -19,7 +19,7 @@
     org $+size
     endm
 
-; Some defines to reduce errors and mix usp.
+; Some defines to reduce errors and mix ups.
 
     define rsp ix       ; The FORTH Return Stack Pointer
     define pnext iy     ; A pointer to the FORTH next primitive.
