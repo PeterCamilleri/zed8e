@@ -21,8 +21,8 @@
 
 ; Some defines to reduce errors and mix usp.
 
-    define rsp ix
-    define pnext iy
+    define rsp ix       ; The FORTH Return Stack Pointer
+    define pnext iy     ; A pointer to the FORTH next primitive.
     ; The sp is the FORTH dsp but since it almost never used by name,
     ; there is little point in giving it an alias.
 
