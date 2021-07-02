@@ -1,6 +1,6 @@
 ; Zed8E FORTH - A direct threaded FORTH for the Z-80
 ;
-; The FORTH ROM dictionary part A, stack manipulation.
+; The FORTH ROM dictionary part B, arithmetic operations.
 ;
 
 __add:      ; a b -- b+a
