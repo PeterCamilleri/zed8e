@@ -28,7 +28,7 @@ start_up:
     ld      h,a
     ld      [__current],hl
 
-    ; Set the default width.
+    ; Set the default console width.
     ld      a,80
     ld      (__width),a
 

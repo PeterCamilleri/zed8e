@@ -35,7 +35,7 @@ next:
     ; Note: rst $10 is not available.
     ; Note: rst $18 is not available.
 
-    ; Push a constant onto the address.
+    ; Push a constant onto the data stack.
     pad_to  $0020       ; Entry point for rst $20 or do_const
     pop     hl
     ld      e,(hl)
@@ -44,7 +44,7 @@ next:
     push    de
     jp      pnext       ; NEXT
 
-    ; Push the address of a variable onto the stack.
+    ; Push the address of a variable onto the data stack.
     pad_to  $0028       ; Entry point for rst $28 or do_var
     jp      pnext       ; NEXT
 
