@@ -8,9 +8,10 @@
     org $0000           ; The system reset entry point.
 
     ; The processor RESET entry point. It all starts here.
-    di                  ; Make certain that interrupts are disabled.
-    ld      sp,init_ds  ; Set up the FORTH data stack pointer.
     jp      start_up
+
+    ; A code signature string.
+    abyte   0 "Zed8E"
 
     ; The entry point for colon definitions.
     pad_to  $0008       ; Entry point for rst $08 or do_colon
