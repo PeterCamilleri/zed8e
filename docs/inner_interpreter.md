@@ -92,9 +92,9 @@ namely do_semi (for semi-colon).
 
 ```
 cfa_do_semi:
-    dec     rsp         ; Pop the IP from the RS
+    inc     rsp         ; Pop the IP from the RS
     ld      b,(rsp)
-    dec     rsp
+    inc     rsp
     ld      c,(rsp)
     jp      pnext
 ```
